@@ -1,13 +1,23 @@
-using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Web;
+using Microsoft.EntityFrameworkCore;
+using StreamInstruments.DataAccess;
+using StreamInstruments.Helpers;
 using StreamInstruments.Hubs.Api.Data;
+using StreamInstruments.Hubs.Api.Domain.Infrastructure;
+using StreamInstruments.Hubs.Api.Infrastructure.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddDbContext<StreamInstrumentsContext>(opts =>
+{
+    opts.UseSqlite(ConfigurationHelper.GetDbConnectionString());
+});
+
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddSingleton<WeatherForecastService>();
+DomainInstaller.Install(builder.Services);
+InfrastructureInstaller.Install(builder.Services);
 
 var app = builder.Build();
 

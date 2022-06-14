@@ -14,7 +14,9 @@
     </ItemGroup>
 
     <ItemGroup>
+        <ProjectReference Include="..\StreamInstruments.DataAccess\StreamInstruments.DataAccess.csproj" />
         <ProjectReference Include="..\StreamInstruments.Hubs.Api.Domain\StreamInstruments.Hubs.Api.Domain.csproj" />
+        <ProjectReference Include="..\StreamInstruments.Hubs.Api.Infrastructure\StreamInstruments.Hubs.Api.Infrastructure.csproj" />
     </ItemGroup>
 
 </Project>

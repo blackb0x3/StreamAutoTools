@@ -1,0 +1,64 @@
+﻿@page "/commands"
+
+<PageTitle>Commands List</PageTitle>
+
+@using StreamInstruments.Hubs.Api.Domain.Representations;
+@using MediatR;
+@using StreamInstruments.Hubs.Api.Domain.PrimaryPorts.GetStreamCommands
+@inject IMediator Mediator
+
+<h1>Commands List</h1>
+
+<p>List of commands for the channel.</p>
+
+@if (Commands == null)
+{
+    <p>
+        <em>Loading...</em>
+    </p>
+}
+else
+{
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Response Text</th>
+            <th>Required Access Level</th>
+            <th>Response Destination</th>
+            <th>Individual Cooldown (seconds)</th>
+            <th>Global Cooldown (seconds)</th>
+            <th>Is Active?</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var cmd in Commands)
+        {
+            <tr>
+                <td>@cmd.Name</td>
+                <td>@cmd.ResponseText</td>
+                <td>@cmd.AccessLevel</td>
+                <td>@cmd.ResponseDestination</td>
+                <td>@cmd.IndividualCooldownSeconds</td>
+                <td>@cmd.GlobalCooldownSeconds</td>
+                <td>@cmd.IsActive</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}
+
+@code
+{
+    private List<Command> Commands;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var getCommandsResp = await Mediator.Send(new GetStreamCommandsQuery());
+
+        if (getCommandsResp.IsT0)
+        {
+            Commands = getCommandsResp.AsT0.CommandsRepresentation.Commands;
+        }
+    }
+}

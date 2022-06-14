@@ -10,16 +10,9 @@ public class StreamInstrumentsContextFactory : IDesignTimeDbContextFactory<Strea
     public StreamInstrumentsContext CreateDbContext(string[] args)
     {
         var optionsBuilder = new DbContextOptionsBuilder<StreamInstrumentsContext>();
-        var connectionString = GetConnectionString();
+        var connectionString = ConfigurationHelper.GetDbConnectionString();
         optionsBuilder.UseSqlite(connectionString);
 
         return new StreamInstrumentsContext(optionsBuilder.Options);
-    }
-
-    private static string GetConnectionString()
-    {
-        var config = ConfigurationHelper.GetConfig();
-
-        return config.GetConnectionString("SqliteConnection");
     }
 }

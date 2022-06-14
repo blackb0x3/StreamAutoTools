@@ -13,4 +13,11 @@ public static class ConfigurationHelper
             .AddJsonFile(FileConstants.AppSettingsFileName)
             .Build();
     }
+
+    public static string GetDbConnectionString()
+    {
+        var config = GetConfig();
+
+        return config.GetConnectionString(ConfigConstants.SqliteConnectionKeyName);
+    }
 }
