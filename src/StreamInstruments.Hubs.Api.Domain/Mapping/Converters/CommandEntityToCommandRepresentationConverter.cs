@@ -4,7 +4,7 @@ using StreamInstruments.Extensions;
 
 namespace StreamInstruments.Hubs.Api.Domain.Mapping.Converters;
 
-public class CommandEntityToCommandRepresentationCommandConverter : ITypeConverter<Command, Representations.Command>
+public class CommandEntityToCommandRepresentationConverter : ITypeConverter<Command, Representations.Command>
 {
     public Representations.Command Convert(Command source, Representations.Command destination, ResolutionContext context)
     {

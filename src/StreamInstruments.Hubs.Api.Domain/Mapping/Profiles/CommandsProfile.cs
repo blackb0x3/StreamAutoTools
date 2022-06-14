@@ -9,6 +9,6 @@ public class CommandsProfile : Profile
     public CommandsProfile()
     {
         CreateMap<Command, Representations.Command>()
-            .ConvertUsing<CommandEntityToCommandRepresentationCommandConverter>();
+            .ConvertUsing<CommandEntityToCommandRepresentationConverter>();
     }
 }
