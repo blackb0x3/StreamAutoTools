@@ -11,7 +11,9 @@ public class CommandEntityToCommandRepresentationConverter : ITypeConverter<Comm
         return new Representations.Command
         {
             Name = source.Name,
-            ResponseText = source.ResponseText,
+            Description = !string.IsNullOrWhiteSpace(source.Description)
+                ? source.Description
+                : "No description available",
             AccessLevel = source.AccessLevel.ToDescription(),
             ResponseDestination = source.ResponseDestination.ToDescription(),
             IndividualCooldownSeconds = source.IndividualCooldownSeconds,

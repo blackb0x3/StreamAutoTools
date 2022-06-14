@@ -8,6 +8,11 @@ public class Command : EntityBase
     public string Name { get; set; }
 
     /// <summary>
+    /// Some useful information about the command. E.g. what it does, usage, 
+    /// </summary>
+    public string Description { get; set; }
+
+    /// <summary>
     /// The pre-processed response text sent to the specified <see cref="ResponseDestination"/>.
     /// </summary>
     public string ResponseText { get; set; }
