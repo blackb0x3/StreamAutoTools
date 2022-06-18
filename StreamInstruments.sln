@@ -82,6 +82,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{19
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StreamInstruments.Services.Common", "src\StreamInstruments.Services.Common\StreamInstruments.Services.Common.csproj", "{2A9CD001-84D0-4660-A472-5BF09146F26D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StreamInstruments.Services.Caching", "src\StreamInstruments.Services.Caching\StreamInstruments.Services.Caching.csproj", "{5E31F5B4-9F25-4637-9177-BEFB1E888090}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -127,6 +129,7 @@ Global
 		{09080369-2DC7-4CD7-ABB2-0D3C9E04EC67} = {E627F2F4-A728-4D64-85D1-59C1EA5C064A}
 		{19C36CE1-5F09-4A6C-9859-7ED6F7E90CFD} = {4045DD95-4079-4D08-8FAB-DE2A88DCF3FA}
 		{2A9CD001-84D0-4660-A472-5BF09146F26D} = {19C36CE1-5F09-4A6C-9859-7ED6F7E90CFD}
+		{5E31F5B4-9F25-4637-9177-BEFB1E888090} = {19C36CE1-5F09-4A6C-9859-7ED6F7E90CFD}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{13ADBC9F-05D7-4E5B-88D6-0A349EDEC737}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -241,5 +244,9 @@ Global
 		{2A9CD001-84D0-4660-A472-5BF09146F26D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2A9CD001-84D0-4660-A472-5BF09146F26D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2A9CD001-84D0-4660-A472-5BF09146F26D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5E31F5B4-9F25-4637-9177-BEFB1E888090}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E31F5B4-9F25-4637-9177-BEFB1E888090}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E31F5B4-9F25-4637-9177-BEFB1E888090}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E31F5B4-9F25-4637-9177-BEFB1E888090}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

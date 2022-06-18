@@ -1,16 +1,12 @@
-﻿using StreamInstruments.Models;
-
-namespace StreamInstruments.Interfaces;
+﻿namespace StreamInstruments.Interfaces;
 
 public interface ICacheService
 {
-    bool KeyExists(string key);
+    Task<T> ReadValueAsync<T>(string key, CancellationToken cancellationToken) where T : class;
 
-    Task<CacheServiceReadResult<T>> ReadValueAsync<T>(string key) where T : class;
+    Task WriteValueAsync<T>(string key, T value, TimeSpan expiry, bool overwrite, CancellationToken cancellationToken) where T : class;
 
-    Task<CacheServiceWriteResult> WriteValueAsync<T>(string key, T value, TimeSpan expiry, bool overwrite) where T : class;
+    Task RemoveValueAsync(string key, CancellationToken cancellationToken);
 
-    Task<CacheServiceRemoveResult> RemoveValueAsync(string key);
-
-    Task<CacheServiceRemoveAllResult> RemoveAllValuesAsync();
+    Task ClearAsync(CancellationToken cancellationToken);
 }
