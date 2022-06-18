@@ -74,6 +74,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StreamInstruments.Validatio
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StreamInstruments.Hubs.Api.Validation", "src\StreamInstruments.Hubs.Api.Validation\StreamInstruments.Hubs.Api.Validation.csproj", "{05BEFA8A-7251-4689-AD92-17F905BEA3BA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StreamInstruments.Interfaces", "src\StreamInstruments.Interfaces\StreamInstruments.Interfaces.csproj", "{DB5FCFBC-034A-43EC-B237-62EF3217A174}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StreamInstruments.Models", "src\StreamInstruments.Models\StreamInstruments.Models.csproj", "{09080369-2DC7-4CD7-ABB2-0D3C9E04EC67}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -115,6 +119,8 @@ Global
 		{3707D683-821F-4C5E-BDA5-A8742AEF4024} = {9E13D521-1D26-4477-8C19-88D636FC2177}
 		{4EB31F47-B2ED-4094-B7C0-73C4AB18B5C5} = {E627F2F4-A728-4D64-85D1-59C1EA5C064A}
 		{05BEFA8A-7251-4689-AD92-17F905BEA3BA} = {0CDE5D41-4005-4980-9D65-0C7D283B126B}
+		{DB5FCFBC-034A-43EC-B237-62EF3217A174} = {E627F2F4-A728-4D64-85D1-59C1EA5C064A}
+		{09080369-2DC7-4CD7-ABB2-0D3C9E04EC67} = {E627F2F4-A728-4D64-85D1-59C1EA5C064A}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{13ADBC9F-05D7-4E5B-88D6-0A349EDEC737}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -217,5 +223,13 @@ Global
 		{05BEFA8A-7251-4689-AD92-17F905BEA3BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{05BEFA8A-7251-4689-AD92-17F905BEA3BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{05BEFA8A-7251-4689-AD92-17F905BEA3BA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DB5FCFBC-034A-43EC-B237-62EF3217A174}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB5FCFBC-034A-43EC-B237-62EF3217A174}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB5FCFBC-034A-43EC-B237-62EF3217A174}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB5FCFBC-034A-43EC-B237-62EF3217A174}.Release|Any CPU.Build.0 = Release|Any CPU
+		{09080369-2DC7-4CD7-ABB2-0D3C9E04EC67}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{09080369-2DC7-4CD7-ABB2-0D3C9E04EC67}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{09080369-2DC7-4CD7-ABB2-0D3C9E04EC67}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{09080369-2DC7-4CD7-ABB2-0D3C9E04EC67}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
