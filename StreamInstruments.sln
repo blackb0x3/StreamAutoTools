@@ -78,6 +78,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StreamInstruments.Interface
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StreamInstruments.Models", "src\StreamInstruments.Models\StreamInstruments.Models.csproj", "{09080369-2DC7-4CD7-ABB2-0D3C9E04EC67}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{19C36CE1-5F09-4A6C-9859-7ED6F7E90CFD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StreamInstruments.Services.Common", "src\StreamInstruments.Services.Common\StreamInstruments.Services.Common.csproj", "{2A9CD001-84D0-4660-A472-5BF09146F26D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -121,6 +125,8 @@ Global
 		{05BEFA8A-7251-4689-AD92-17F905BEA3BA} = {0CDE5D41-4005-4980-9D65-0C7D283B126B}
 		{DB5FCFBC-034A-43EC-B237-62EF3217A174} = {E627F2F4-A728-4D64-85D1-59C1EA5C064A}
 		{09080369-2DC7-4CD7-ABB2-0D3C9E04EC67} = {E627F2F4-A728-4D64-85D1-59C1EA5C064A}
+		{19C36CE1-5F09-4A6C-9859-7ED6F7E90CFD} = {4045DD95-4079-4D08-8FAB-DE2A88DCF3FA}
+		{2A9CD001-84D0-4660-A472-5BF09146F26D} = {19C36CE1-5F09-4A6C-9859-7ED6F7E90CFD}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{13ADBC9F-05D7-4E5B-88D6-0A349EDEC737}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -231,5 +237,9 @@ Global
 		{09080369-2DC7-4CD7-ABB2-0D3C9E04EC67}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{09080369-2DC7-4CD7-ABB2-0D3C9E04EC67}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{09080369-2DC7-4CD7-ABB2-0D3C9E04EC67}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A9CD001-84D0-4660-A472-5BF09146F26D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A9CD001-84D0-4660-A472-5BF09146F26D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A9CD001-84D0-4660-A472-5BF09146F26D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A9CD001-84D0-4660-A472-5BF09146F26D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
