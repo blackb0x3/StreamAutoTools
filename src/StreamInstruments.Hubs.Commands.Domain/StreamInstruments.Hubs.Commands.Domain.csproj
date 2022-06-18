@@ -13,4 +13,9 @@
       <PackageReference Include="OneOf" Version="3.0.216" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\StreamInstruments.DataObjects\StreamInstruments.DataObjects.csproj" />
+      <ProjectReference Include="..\StreamInstruments.Hubs.Commands.SecondaryPorts\StreamInstruments.Hubs.Commands.SecondaryPorts.csproj" />
+    </ItemGroup>
+
 </Project>
