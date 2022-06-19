@@ -16,6 +16,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\StreamInstruments.Common\StreamInstruments.Common.csproj" />
+      <ProjectReference Include="..\StreamInstruments.Models\StreamInstruments.Models.csproj" />
     </ItemGroup>
 
 </Project>
