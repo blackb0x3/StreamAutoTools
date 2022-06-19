@@ -16,6 +16,7 @@
     <ItemGroup>
       <ProjectReference Include="..\StreamInstruments.DataAccess\StreamInstruments.DataAccess.csproj" />
       <ProjectReference Include="..\StreamInstruments.Hubs.Commands.SecondaryPorts\StreamInstruments.Hubs.Commands.SecondaryPorts.csproj" />
+      <ProjectReference Include="..\StreamInstruments.Interfaces\StreamInstruments.Interfaces.csproj" />
     </ItemGroup>
 
 </Project>

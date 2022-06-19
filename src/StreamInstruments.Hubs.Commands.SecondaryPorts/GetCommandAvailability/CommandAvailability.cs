@@ -1,4 +1,4 @@
-﻿namespace StreamInstruments.Hubs.Commands.Domain.Representations;
+﻿namespace StreamInstruments.Hubs.Commands.SecondaryPorts.GetCommandAvailability;
 
 public enum CommandAvailability
 {

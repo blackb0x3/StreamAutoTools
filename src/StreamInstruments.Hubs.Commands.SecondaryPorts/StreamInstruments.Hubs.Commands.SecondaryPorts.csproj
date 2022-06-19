@@ -14,6 +14,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\StreamInstruments.DataObjects\StreamInstruments.DataObjects.csproj" />
+      <ProjectReference Include="..\StreamInstruments.Models\StreamInstruments.Models.csproj" />
     </ItemGroup>
 
 </Project>
