@@ -16,7 +16,7 @@ public class InMemoryCacheService : ICacheService
         _innerCache = innerCache;
     }
 
-    public async Task<T> ReadValueAsync<T>(string key, CancellationToken cancellationToken) where T : class
+    public async Task<T> ReadValueAsync<T>(string key, CancellationToken cancellationToken)
     {
         return await PerformCacheOperationAsync(() =>
         {
@@ -26,7 +26,7 @@ public class InMemoryCacheService : ICacheService
         }, cancellationToken);
     }
 
-    public async Task WriteValueAsync<T>(string key, T value, TimeSpan expiry, bool overwrite, CancellationToken cancellationToken) where T : class
+    public async Task WriteValueAsync<T>(string key, T value, TimeSpan expiry, bool overwrite, CancellationToken cancellationToken)
     {
         await PerformCacheOperationAsync(() =>
         {
