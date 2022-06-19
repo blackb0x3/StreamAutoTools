@@ -119,11 +119,4 @@ internal class ExecuteCommandRequestHandler : IRequestHandler<ExecuteCommandRequ
 
         return command;
     }
-    /*
-     * await _cacheService.WriteValueAsync(GlobalCooldownKey(command.Id), true,
-            TimeSpan.FromSeconds(command.GlobalCooldownSeconds), true, cancellationToken);
-
-        await _cacheService.WriteValueAsync(ViewerCooldownKey(command.Id, senderUsername), true,
-            TimeSpan.FromSeconds(command.GlobalCooldownSeconds), true, cancellationToken);
-     */
 }
