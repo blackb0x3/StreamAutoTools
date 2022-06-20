@@ -18,6 +18,12 @@ public static class StringExtensions
     /// </exception>
     public static string ExtractSubstring(this string toExtractFrom, string start, string end)
     {
+        // quick exit here, as it's the equivalent of returning the input string when true
+        if (string.IsNullOrEmpty(start) && string.IsNullOrEmpty(end))
+        {
+            return toExtractFrom;
+        }
+
         var startIndex = toExtractFrom.IndexOf(start, StringComparison.Ordinal);
         var endIndex = toExtractFrom.LastIndexOf(end, StringComparison.Ordinal);
 

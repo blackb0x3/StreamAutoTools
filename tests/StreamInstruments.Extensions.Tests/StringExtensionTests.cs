@@ -7,7 +7,6 @@ namespace StreamInstruments.Extensions.Tests;
 public class ExtractString_Extension_Method
 {
     [Test]
-    [TestCase("", "", "", "")]
     [TestCase("(123)", "(", ")", "123")]
     [TestCase("(4, 5, 6, 7, 8, 9)", "(", ")", "4, 5, 6, 7, 8, 9")]
     [TestCase("(abcdefghijklmn())", "(", ")", "abcdefghijklmn()")]
@@ -15,6 +14,7 @@ public class ExtractString_Extension_Method
     [TestCase("(abcdefghijklmn())", "abc", "ghi", "def")]
     [TestCase("(abcdefghijklmn())", "abcdefghijklmn", "()", "")]
     [TestCase("(abcdefghijklmn())", "", "", "(abcdefghijklmn())")]
+    [TestCase("(abcdefghijklmn())", null, null, "(abcdefghijklmn())")]
     public void Returns_Correct_Substring(string toExtractFrom, string start, string end, string expectedSubstring)
     {
         toExtractFrom.ExtractSubstring(start, end).Should().Be(expectedSubstring);
