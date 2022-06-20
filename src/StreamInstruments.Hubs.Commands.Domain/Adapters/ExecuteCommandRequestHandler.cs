@@ -1,20 +1,27 @@
-﻿using MediatR;
+﻿using System.Text;
+using MediatR;
 using OneOf;
+using PCRE;
 using StreamInstruments.DataObjects;
 using StreamInstruments.Extensions;
-using StreamInstruments.Helpers;
 using StreamInstruments.Hubs.Commands.Domain.PrimaryPorts.ExecuteCommand;
 using StreamInstruments.Hubs.Commands.Domain.Representations;
 using StreamInstruments.Hubs.Commands.SecondaryPorts.ActivateCommandCooldown;
 using StreamInstruments.Hubs.Commands.SecondaryPorts.GetCommandAvailability;
 using StreamInstruments.Hubs.Commands.SecondaryPorts.GetCommandByName;
 using StreamInstruments.Interfaces;
-using StreamInstruments.Models;
 
 namespace StreamInstruments.Hubs.Commands.Domain.Adapters;
 
 internal class ExecuteCommandRequestHandler : IRequestHandler<ExecuteCommandRequest, OneOf<ExecuteCommandResponse, ErrorResponse>>
 {
+    /// <remarks>
+    /// PcreRegex supports recursive regex tokens, which are required by the handler to
+    /// find command text expressions.
+    /// Command text expressions are of the form: ${module.function arg1 arg2 arg3 etc.}
+    /// </remarks>
+    private static readonly PcreRegex _commandExpressionRegex = new(@"(\$\{(?>[^${}]+|(?1))+\})");
+
     private readonly IMediator _mediator;
     private readonly ICacheService _cacheService;
 
@@ -78,6 +85,7 @@ internal class ExecuteCommandRequestHandler : IRequestHandler<ExecuteCommandRequ
         }
 
         // Parse the command text
+        var parsedCommandText = await ParseCommandTextAsync(command.ResponseText, request.MessageArguments);
 
         // Before returning - ensure we activate the cooldowns
         var activateGlobalCooldownRequest = new ActivateCommandCooldownRequest
@@ -102,8 +110,27 @@ internal class ExecuteCommandRequestHandler : IRequestHandler<ExecuteCommandRequ
         // Return a response which includes the parsed command text
         return new ExecuteCommandResponse
         {
-            Output = string.Empty
+            Output = parsedCommandText,
+            ResponseDestination = command.ResponseDestination
         };
+    }
+
+    private async Task<string> ParseCommandTextAsync(string commandText, string[] messageArgs)
+    {
+        var sb = new StringBuilder(commandText);
+
+        var commandExpressionMatches = _commandExpressionRegex.Matches(commandText);
+
+        foreach (var match in commandExpressionMatches)
+        {
+            // guaranteed to not be null or empty
+            // the command expression regex checks this for us
+            var matchText = match.Groups
+                .First().Value
+                .ExtractSubstring("${", "}");
+        }
+
+        return sb.ToString();
     }
 
     private async Task<OneOf<Command, ErrorResponse>> GetCommandAsync(string commandName, CancellationToken cancellationToken)
