@@ -9,6 +9,8 @@ public class ExecuteCommandRequest : IRequest<OneOf<ExecuteCommandResponse, Erro
 {
     public string CommandName { get; set; }
 
+    public string[] MessageArguments { get; set; }
+
     public bool IsDryRun { get; set; }
 
     public string SenderUsername { get; set; }
