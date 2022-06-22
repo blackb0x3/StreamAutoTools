@@ -7,6 +7,7 @@ using StreamInstruments.DataObjects;
 using StreamInstruments.Extensions;
 using StreamInstruments.Hubs.Commands.Domain.PrimaryPorts.ExecuteCommand;
 using StreamInstruments.Hubs.Commands.Domain.Representations;
+using StreamInstruments.Hubs.Commands.Modules;
 using StreamInstruments.Hubs.Commands.SecondaryPorts.ActivateCommandCooldown;
 using StreamInstruments.Hubs.Commands.SecondaryPorts.GetCommandAvailability;
 using StreamInstruments.Hubs.Commands.SecondaryPorts.GetCommandByName;
@@ -24,12 +25,12 @@ internal class ExecuteCommandRequestHandler : IRequestHandler<ExecuteCommandRequ
     private static readonly PcreRegex _commandExpressionRegex = new(@"(\$\{(?>[^${}]+|(?1))+\})");
 
     private readonly IMediator _mediator;
-    private readonly ICacheService _cacheService;
+    private readonly IModuleFactory _moduleFactory;
 
-    public ExecuteCommandRequestHandler(IMediator mediator, ICacheService cacheService)
+    public ExecuteCommandRequestHandler(IMediator mediator, IModuleFactory moduleFactory)
     {
         _mediator = mediator;
-        _cacheService = cacheService;
+        _moduleFactory = moduleFactory;
     }
 
     public async Task<OneOf<ExecuteCommandResponse, ErrorResponse>> Handle(ExecuteCommandRequest request, CancellationToken cancellationToken)
@@ -116,6 +117,20 @@ internal class ExecuteCommandRequestHandler : IRequestHandler<ExecuteCommandRequ
         };
     }
 
+    private async Task<OneOf<Command, ErrorResponse>> GetCommandAsync(string commandName, CancellationToken cancellationToken)
+    {
+        var getCommandQuery = new GetCommandByNameQuery { CommandName = commandName };
+
+        var command = await _mediator.Send(getCommandQuery, cancellationToken);
+
+        if (command is null)
+        {
+            return new ErrorResponse { Message = $"Command {commandName} does not exist." };
+        }
+
+        return command;
+    }
+
     private async Task<string> ParseCommandTextAsync(string commandText, string[] messageArgs)
     {
         var sb = new StringBuilder(commandText);
@@ -123,7 +138,7 @@ internal class ExecuteCommandRequestHandler : IRequestHandler<ExecuteCommandRequ
         var commandExpressions = _commandExpressionRegex.Matches(commandText)
             // for each match, there is guaranteed to be a single group containing a matching non-null, non-empty string
             //     - the command expression regex checks this for us
-            .Select(match => match.Groups.First().Value)
+            .Select(match => match.Groups[0].Value)
             .Distinct()
             .ToList();
 
@@ -151,23 +166,21 @@ internal class ExecuteCommandRequestHandler : IRequestHandler<ExecuteCommandRequ
     {
         // we have to check if commandExpressionInnerText contains command expressions inside of that
         // so we want to recursively call ParseCommandTextAsync first, to resolve them all
-        var commandExpressionReadyForParsing = await ParseCommandTextAsync(commandExpressionInnerText, messageArgs);
+        var commandExpressionInnerTextParsed = await ParseCommandTextAsync(commandExpressionInnerText, messageArgs);
 
-        // TODO parse the `Module.Command` part now that the child command expressions are parsed
-        return commandExpressionReadyForParsing;
+        (string moduleName, string commandName, string[] commandArgs) = ParseModuleAndCommandAndArgsFromCommandText(commandExpressionInnerTextParsed);
+
+        var module = _moduleFactory.GetModule(moduleName);
+        var result = await module.ExecuteFunctionAsync(commandName, commandArgs);
+
+        return result;
     }
 
-    private async Task<OneOf<Command, ErrorResponse>> GetCommandAsync(string commandName, CancellationToken cancellationToken)
+    private static (string, string, string[]) ParseModuleAndCommandAndArgsFromCommandText(string commandExpressionInnerText)
     {
-        var getCommandQuery = new GetCommandByNameQuery { CommandName = commandName };
+        var components = commandExpressionInnerText.Split();
+        var moduleAndCommandComponents = components.First().Split('.');
 
-        var command = await _mediator.Send(getCommandQuery, cancellationToken);
-
-        if (command is null)
-        {
-            return new ErrorResponse { Message = $"Command {commandName} does not exist." };
-        }
-
-        return command;
+        return (moduleAndCommandComponents[0], moduleAndCommandComponents[1], components[1..]);
     }
 }
