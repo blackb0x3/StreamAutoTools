@@ -18,6 +18,7 @@
       <ProjectReference Include="..\StreamInstruments.DataObjects\StreamInstruments.DataObjects.csproj" />
       <ProjectReference Include="..\StreamInstruments.Extensions\StreamInstruments.Extensions.csproj" />
       <ProjectReference Include="..\StreamInstruments.Helpers\StreamInstruments.Helpers.csproj" />
+      <ProjectReference Include="..\StreamInstruments.Hubs.Commands.Modules\StreamInstruments.Hubs.Commands.Modules.csproj" />
       <ProjectReference Include="..\StreamInstruments.Hubs.Commands.SecondaryPorts\StreamInstruments.Hubs.Commands.SecondaryPorts.csproj" />
       <ProjectReference Include="..\StreamInstruments.Interfaces\StreamInstruments.Interfaces.csproj" />
     </ItemGroup>
