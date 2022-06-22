@@ -127,7 +127,7 @@ internal class ExecuteCommandRequestHandler : IRequestHandler<ExecuteCommandRequ
             //     - the command expression regex checks this for us
             var matchText = match.Groups
                 .First().Value
-                .ExtractSubstring("${", "}");
+                .ExtractSubstringBetween("${", "}");
         }
 
         return sb.ToString();

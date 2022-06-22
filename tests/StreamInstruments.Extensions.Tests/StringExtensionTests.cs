@@ -17,13 +17,13 @@ public class ExtractString_Extension_Method
     [TestCase("(abcdefghijklmn())", null, null, "(abcdefghijklmn())")]
     public void Returns_Correct_Substring(string toExtractFrom, string start, string end, string expectedSubstring)
     {
-        toExtractFrom.ExtractSubstring(start, end).Should().Be(expectedSubstring);
+        toExtractFrom.ExtractSubstringBetween(start, end).Should().Be(expectedSubstring);
     }
 
     [Test]
     public void Throws_ArgumentException_On_Start_Not_Appearing_In_String_ToExtractFrom()
     {
-        Action act = () => "def".ExtractSubstring("abc", "def");
+        Action act = () => "def".ExtractSubstringBetween("abc", "def");
 
         act.Should().Throw<ArgumentException>().WithMessage("'abc' does not appear in string 'def'.");
     }
@@ -31,7 +31,7 @@ public class ExtractString_Extension_Method
     [Test]
     public void Throws_ArgumentException_On_End_Not_Appearing_In_String_ToExtractFrom()
     {
-        Action act = () => "abc".ExtractSubstring("abc", "def");
+        Action act = () => "abc".ExtractSubstringBetween("abc", "def");
 
         act.Should().Throw<ArgumentException>().WithMessage("'def' does not appear in string 'abc'.");
     }
@@ -39,7 +39,7 @@ public class ExtractString_Extension_Method
     [Test]
     public void Throws_ArgumentException_On_Start_String_Located_Ahead_Of_End_String_In_String_ToExtractFrom()
     {
-        Action act = () => "abcdefghijklmn".ExtractSubstring("ghi", "abc");
+        Action act = () => "abcdefghijklmn".ExtractSubstringBetween("ghi", "abc");
 
         act.Should().Throw<ArgumentException>().WithMessage("startIndex cannot be ahead of endIndex.");
     }

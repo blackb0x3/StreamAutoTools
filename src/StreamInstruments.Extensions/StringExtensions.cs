@@ -8,7 +8,7 @@ public static class StringExtensions
     /// <example>
     /// For example:
     /// <code >
-    /// Console.WriteLine("(abc)".ExtractSubstring("(", ")"));
+    /// Console.WriteLine("(abc)".ExtractSubstringBetween("(", ")"));
     /// </code>
     /// Would output "abc".
     /// </example>
@@ -24,7 +24,7 @@ public static class StringExtensions
     /// string <see cref="toExtractFrom"/>, or if <see cref="start"/> is ahead of <see cref="end"/>
     /// in the string <see cref="toExtractFrom"/>.
     /// </exception>
-    public static string ExtractSubstring(this string toExtractFrom, string start, string end)
+    public static string ExtractSubstringBetween(this string toExtractFrom, string start, string end)
     {
         // quick exit here, as it's the equivalent of returning the input string when true
         if (string.IsNullOrEmpty(start) && string.IsNullOrEmpty(end))
