@@ -8,8 +8,14 @@
 
     <ItemGroup>
       <PackageReference Include="MediatR" Version="10.0.1" />
+      <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0" />
       <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
       <PackageReference Include="OneOf" Version="3.0.216" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\StreamInstruments.DataAccess\StreamInstruments.DataAccess.csproj" />
+      <ProjectReference Include="..\StreamInstruments.Extensions\StreamInstruments.Extensions.csproj" />
     </ItemGroup>
 
 </Project>
