@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Globalization;
+using System.Text;
 using MediatR;
 using OneOf;
 using PCRE;
@@ -119,18 +120,41 @@ internal class ExecuteCommandRequestHandler : IRequestHandler<ExecuteCommandRequ
     {
         var sb = new StringBuilder(commandText);
 
-        var commandExpressionMatches = _commandExpressionRegex.Matches(commandText);
-
-        foreach (var match in commandExpressionMatches)
-        {
+        var commandExpressions = _commandExpressionRegex.Matches(commandText)
             // for each match, there is guaranteed to be a single group containing a matching non-null, non-empty string
             //     - the command expression regex checks this for us
-            var matchText = match.Groups
-                .First().Value
-                .ExtractSubstringBetween("${", "}");
+            .Select(match => match.Groups.First().Value)
+            .Distinct()
+            .ToList();
+
+        foreach (var commandExpression in commandExpressions)
+        {
+            var commandExpressionInnerText = commandExpression.ExtractSubstringBetween("${", "}");
+
+            // the inner text of the command expression will be either:
+            //     - an integer, in which case get 
+            if (int.TryParse(commandExpressionInnerText, NumberStyles.Integer, CultureInfo.InvariantCulture, out var parsedMessageArgIndex))
+            {
+                sb.Replace(commandExpression, messageArgs[parsedMessageArgIndex]);
+            }
+            else
+            {
+                var parsedInnerText = await ParseInnerTextAsync(commandExpressionInnerText, messageArgs);
+                sb.Replace(commandExpression, parsedInnerText);
+            }
         }
 
         return sb.ToString();
+    }
+
+    private async Task<string> ParseInnerTextAsync(string commandExpressionInnerText, string[] messageArgs)
+    {
+        // we have to check if commandExpressionInnerText contains command expressions inside of that
+        // so we want to recursively call ParseCommandTextAsync first, to resolve them all
+        var commandExpressionReadyForParsing = await ParseCommandTextAsync(commandExpressionInnerText, messageArgs);
+
+        // TODO parse the `Module.Command` part now that the child command expressions are parsed
+        return commandExpressionReadyForParsing;
     }
 
     private async Task<OneOf<Command, ErrorResponse>> GetCommandAsync(string commandName, CancellationToken cancellationToken)
