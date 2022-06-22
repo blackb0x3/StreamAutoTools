@@ -15,7 +15,7 @@ public enum RuleEvent
     /// </summary>
     NewFollower,
     /// <summary>
-    /// Activates when a viewer donates bits as part of a chat message.
+    /// Activates when a viewer donates Twitch bits as part of a chat message.
     /// </summary>
     BitDonation,
     /// <summary>
@@ -27,15 +27,15 @@ public enum RuleEvent
     /// </summary>
     GiftedSub,
     /// <summary>
-    /// Activates when a streamer receives a raid from another streamer.
+    /// Activates when a streamer receives a raid from another streamer on Twitch.
     /// </summary>
     IncomingRaid,
     /// <summary>
-    /// Activates when a streamer is about to perform a raid to another streamer's channel.
+    /// Activates when a streamer is about to perform a raid to another streamer's channel on Twitch.
     /// </summary>
     OutgoingRaid,
     /// <summary>
-    /// Activates when a streamer's channel reward is redeemed by a viewer.
+    /// Activates when a streamer's Twitch channel reward is redeemed by a viewer.
     /// </summary>
     RewardRedeemed,
 }
