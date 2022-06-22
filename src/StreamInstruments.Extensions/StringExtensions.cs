@@ -5,6 +5,13 @@ public static class StringExtensions
     /// <summary>
     /// Extracts a substring between the first occurrence of <see cref="start"/>
     /// and the last occurrence of <see cref="end"/>.
+    /// <example>
+    /// For example:
+    /// <code >
+    /// Console.WriteLine("(abc)".ExtractSubstring("(", ")"));
+    /// </code>
+    /// Would output "abc".
+    /// </example>
     /// </summary>
     /// <param name="toExtractFrom">The string to extract from.</param>
     /// <param name="start">Where to start extracting from in the string <see cref="toExtractFrom"/></param>
@@ -14,7 +21,8 @@ public static class StringExtensions
     /// </returns>
     /// <exception cref="ArgumentException">
     /// When either the <see cref="start"/> or <see cref="end"/> string does not appear in the
-    /// string <see cref="toExtractFrom"/>.
+    /// string <see cref="toExtractFrom"/>, or if <see cref="start"/> is ahead of <see cref="end"/>
+    /// in the string <see cref="toExtractFrom"/>.
     /// </exception>
     public static string ExtractSubstring(this string toExtractFrom, string start, string end)
     {
