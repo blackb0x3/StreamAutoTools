@@ -123,8 +123,8 @@ internal class ExecuteCommandRequestHandler : IRequestHandler<ExecuteCommandRequ
 
         foreach (var match in commandExpressionMatches)
         {
-            // guaranteed to not be null or empty
-            // the command expression regex checks this for us
+            // for each match, there is guaranteed to be a single group containing a matching non-null, non-empty string
+            //     - the command expression regex checks this for us
             var matchText = match.Groups
                 .First().Value
                 .ExtractSubstring("${", "}");
