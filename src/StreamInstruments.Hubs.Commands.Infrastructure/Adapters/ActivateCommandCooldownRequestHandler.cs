@@ -5,7 +5,7 @@ using StreamInstruments.Interfaces;
 
 namespace StreamInstruments.Hubs.Commands.Infrastructure.Adapters;
 
-public class ActivateCommandCooldownRequestHandler : IRequestHandler<ActivateCommandCooldownRequest>
+internal class ActivateCommandCooldownRequestHandler : IRequestHandler<ActivateCommandCooldownRequest>
 {
     private readonly ICacheService _cacheService;
 

@@ -8,7 +8,7 @@ using StreamInstruments.Models;
 
 namespace StreamInstruments.Hubs.Commands.Infrastructure.Adapters;
 
-public class GetCommandAvailabilityQueryHandler : IRequestHandler<GetCommandAvailabilityQuery, GetCommandAvailabilityResponse>
+internal class GetCommandAvailabilityQueryHandler : IRequestHandler<GetCommandAvailabilityQuery, GetCommandAvailabilityResponse>
 {
     private readonly ICacheService _cacheService;
 
