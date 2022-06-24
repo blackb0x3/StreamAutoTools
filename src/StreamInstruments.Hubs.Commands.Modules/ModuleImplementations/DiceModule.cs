@@ -1,4 +1,6 @@
-﻿namespace StreamInstruments.Hubs.Commands.Modules.ModuleImplementations;
+﻿using System.Globalization;
+
+namespace StreamInstruments.Hubs.Commands.Modules.ModuleImplementations;
 
 public class DiceModule : ModuleBase, IModule
 {
@@ -7,9 +9,34 @@ public class DiceModule : ModuleBase, IModule
     public string Roll(string min, string max, string timesToRoll)
     {
         var numbersRolled = new List<int>();
-        var minInt = Convert.ToInt32(min);
-        var maxInt = Convert.ToInt32(max);
-        var timesToRollInt = Convert.ToInt32(timesToRoll);
+        var parsedMin = int.TryParse(min, NumberStyles.Integer, CultureInfo.InvariantCulture, out var minInt);
+        var parsedMax = int.TryParse(max, NumberStyles.Integer, CultureInfo.InvariantCulture, out var maxInt);
+        var timesToRollParsed = int.TryParse(timesToRoll, NumberStyles.Integer, CultureInfo.InvariantCulture, out var timesToRollInt);
+
+        if (!parsedMin)
+        {
+            throw new Exception($"Invalid lowest dice number - {min}");
+        }
+
+        if (!parsedMax)
+        {
+            throw new Exception($"Invalid highest dice number - {max}");
+        }
+
+        if (!timesToRollParsed)
+        {
+            throw new Exception($"Invalid number of die to roll - {timesToRoll}");
+        }
+
+        if (timesToRollInt < 1)
+        {
+            throw new Exception($"Number of die to roll must be greater than 0. (Found {timesToRoll})");
+        }
+
+        if (minInt > maxInt)
+        {
+            throw new Exception($"Highest number (found {maxInt}) must be greater than lowest number (found {minInt})");
+        }
 
         for (var i = 0; i < timesToRollInt; i++)
         {
@@ -21,19 +48,11 @@ public class DiceModule : ModuleBase, IModule
 
     public string RollOnce(string min, string max)
     {
-        var minInt = Convert.ToInt32(min);
-        var maxInt = Convert.ToInt32(max);
-
-        return Rng.Next(minInt, maxInt).ToString();
+        return Roll(min, max, "1");
     }
 
     public string RollTwice(string min, string max)
     {
-        var minInt = Convert.ToInt32(min);
-        var maxInt = Convert.ToInt32(max);
-        var first = Rng.Next(minInt, maxInt).ToString();
-        var second = Rng.Next(minInt, maxInt).ToString();
-
-        return string.Join(",", first, second);
+        return Roll(min, max, "2");
     }
 }
