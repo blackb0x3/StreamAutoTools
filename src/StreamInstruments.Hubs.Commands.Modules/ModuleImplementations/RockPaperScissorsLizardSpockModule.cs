@@ -17,6 +17,7 @@ public class RockPaperScissorsLizardSpockModule : ModuleBase, IModule
     public string PickRandom(string givenChoice)
     {
         givenChoice = givenChoice.ToLower();
+        ValidatePlayerChoice(givenChoice);
         var rng = new Random().NextDouble();
 
         var cpuChoice = rng switch
@@ -34,6 +35,7 @@ public class RockPaperScissorsLizardSpockModule : ModuleBase, IModule
     public string CounterPick(string givenChoice)
     {
         givenChoice = givenChoice.ToLower();
+        ValidatePlayerChoice(givenChoice);
         var rng = new Random().NextDouble();
 
         var cpuChoice = givenChoice switch
@@ -42,7 +44,8 @@ public class RockPaperScissorsLizardSpockModule : ModuleBase, IModule
             PaperLabel => rng <= 0.5 ? ScissorsLabel : LizardLabel,
             ScissorsLabel => rng <= 0.5 ? SpockLabel : RockLabel,
             SpockLabel => rng <= 0.5 ? LizardLabel : PaperLabel,
-            _ => throw new Exception($"Unknown option {givenChoice}")
+            // should never reach here, but putting it here otherwise, Rider throws a hissy fit
+            _ => throw new ArgumentOutOfRangeException(nameof(givenChoice), givenChoice, null)
         };
 
         return Output(givenChoice, cpuChoice);
@@ -51,6 +54,16 @@ public class RockPaperScissorsLizardSpockModule : ModuleBase, IModule
     public string Explanation()
     {
         return ExplanationUrl;
+    }
+
+    private static void ValidatePlayerChoice(string playerChoice)
+    {
+        var validChoices = new List<string> { RockLabel, PaperLabel, ScissorsLabel };
+
+        if (!validChoices.Contains(playerChoice))
+        {
+            throw new Exception($"Unknown option {playerChoice}");
+        }
     }
 
     private static string Output(string playerChoice, string cpuChoice)
