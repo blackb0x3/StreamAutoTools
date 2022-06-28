@@ -14,7 +14,7 @@ public class RockPaperScissorsModule : ModuleBase, IModule
     {
         givenChoice = givenChoice.ToLower();
         ValidatePlayerChoice(givenChoice);
-        var rng = new Random().NextDouble();
+        var rng = Rng.NextDouble();
 
         var cpuChoice = rng switch
         {
