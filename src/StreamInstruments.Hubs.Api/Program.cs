@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using StreamInstruments.DataAccess;
+using StreamInstruments.DataAccess.Services;
 using StreamInstruments.Helpers;
 using StreamInstruments.Hubs.Api.Data;
 using StreamInstruments.Hubs.Api.Domain.Infrastructure;
@@ -8,10 +9,7 @@ using StreamInstruments.Hubs.Api.Infrastructure.Infrastructure;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddDbContext<StreamInstrumentsContext>(opts =>
-{
-    opts.UseSqlite(ConfigurationHelper.GetDbConnectionString());
-});
+DataAccessInstaller.Install(builder.Services);
 
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();

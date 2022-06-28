@@ -14,4 +14,10 @@
         <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
         <PackageReference Include="OneOf" Version="3.0.216" />
     </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\StreamInstruments.Hubs.Commands.Domain\StreamInstruments.Hubs.Commands.Domain.csproj" />
+      <ProjectReference Include="..\StreamInstruments.Hubs.Commands.Infrastructure\StreamInstruments.Hubs.Commands.Infrastructure.csproj" />
+      <ProjectReference Include="..\StreamInstruments.Services.Caching\StreamInstruments.Services.Caching.csproj" />
+    </ItemGroup>
 </Project>
