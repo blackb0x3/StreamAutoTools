@@ -18,6 +18,7 @@
     <ItemGroup>
       <ProjectReference Include="..\StreamInstruments.Hubs.Commands.Domain\StreamInstruments.Hubs.Commands.Domain.csproj" />
       <ProjectReference Include="..\StreamInstruments.Hubs.Commands.Infrastructure\StreamInstruments.Hubs.Commands.Infrastructure.csproj" />
+      <ProjectReference Include="..\StreamInstruments.Logging\StreamInstruments.Logging.csproj" />
       <ProjectReference Include="..\StreamInstruments.Services.Caching\StreamInstruments.Services.Caching.csproj" />
     </ItemGroup>
 </Project>

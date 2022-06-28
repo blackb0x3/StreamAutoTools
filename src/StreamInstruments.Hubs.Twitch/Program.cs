@@ -2,6 +2,7 @@ using StreamInstruments.DataAccess.Services;
 using StreamInstruments.Hubs.Commands.Domain.Infrastructure;
 using StreamInstruments.Hubs.Commands.Infrastructure.Infrastructure;
 using StreamInstruments.Hubs.Twitch;
+using StreamInstruments.Logging;
 using StreamInstruments.Services.Caching.Installers;
 
 var host = Host.CreateDefaultBuilder(args)
@@ -9,6 +10,7 @@ var host = Host.CreateDefaultBuilder(args)
     {
         DataAccessInstaller.Install(services);
         CachingInstaller.Install(services);
+        LoggingInstaller.Install(services);
         DomainInstaller.Install(services);
         InfrastructureInstaller.Install(services);
         services.AddHostedService<Worker>();
