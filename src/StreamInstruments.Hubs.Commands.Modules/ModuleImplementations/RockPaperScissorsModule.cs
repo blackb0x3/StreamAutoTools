@@ -13,6 +13,7 @@ public class RockPaperScissorsModule : ModuleBase, IModule
     public string PickRandom(string givenChoice)
     {
         givenChoice = givenChoice.ToLower();
+        ValidatePlayerChoice(givenChoice);
         var rng = new Random().NextDouble();
 
         var cpuChoice = rng switch
@@ -28,16 +29,28 @@ public class RockPaperScissorsModule : ModuleBase, IModule
     public string CounterPick(string givenChoice)
     {
         givenChoice = givenChoice.ToLower();
+        ValidatePlayerChoice(givenChoice);
 
         var counterPick = givenChoice switch
         {
             RockLabel => PaperLabel,
             PaperLabel => ScissorsLabel,
             ScissorsLabel => RockLabel,
-            _ => throw new Exception($"Unknown option {givenChoice}")
+            // should never reach here, but putting it here otherwise, Rider throws a hissy fit
+            _ => throw new ArgumentOutOfRangeException(nameof(givenChoice), givenChoice, null)
         };
 
         return Output(givenChoice, counterPick);
+    }
+
+    private static void ValidatePlayerChoice(string playerChoice)
+    {
+        var validChoices = new List<string> { RockLabel, PaperLabel, ScissorsLabel };
+
+        if (!validChoices.Contains(playerChoice))
+        {
+            throw new Exception($"Unknown option {playerChoice}");
+        }
     }
 
     private static string Output(string playerChoice, string cpuChoice)
