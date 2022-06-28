@@ -1,3 +1,5 @@
+using StreamInstruments.Logging;
+
 namespace StreamInstruments.Hubs.Twitch;
 
 public class Worker : BackgroundService
@@ -13,7 +15,7 @@ public class Worker : BackgroundService
     {
         while (!stoppingToken.IsCancellationRequested)
         {
-            _logger.LogInformation("Worker running at: {time}", DateTimeOffset.Now);
+            _logger.LogInfo(new { msg = $"Worker running at: {DateTimeOffset.Now}" });
             await Task.Delay(1000, stoppingToken);
         }
     }

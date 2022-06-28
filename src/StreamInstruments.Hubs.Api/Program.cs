@@ -1,19 +1,16 @@
-using Microsoft.EntityFrameworkCore;
-using StreamInstruments.DataAccess;
+using Serilog;
 using StreamInstruments.DataAccess.Services;
-using StreamInstruments.Helpers;
 using StreamInstruments.Hubs.Api.Data;
 using StreamInstruments.Hubs.Api.Domain.Infrastructure;
 using StreamInstruments.Hubs.Api.Infrastructure.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-DataAccessInstaller.Install(builder.Services);
-
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddSingleton<WeatherForecastService>();
+builder.Host.UseSerilog((context, configuration) => configuration.ReadFrom.Configuration(context.Configuration));
+DataAccessInstaller.Install(builder.Services);
 DomainInstaller.Install(builder.Services);
 InfrastructureInstaller.Install(builder.Services);
 
